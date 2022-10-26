@@ -21,16 +21,14 @@ class Book(models.Model):
     type = models.SmallIntegerField(null=False, default = BookType2.two_days, choices=BookType2.choices)
     created_time=models.DateTimeField(auto_now_add=True)
     image = models.ImageField(null=True, blank=True, default='/placeholder.png')
-    _id = models.AutoField(primary_key=True, editable=False)
     def __str__(self):
         return self.name
 
 class Loan(models.Model):
-    custID = models.ForeignKey(User, on_delete=models.CASCADE,)
-    bookID = models.ForeignKey(Book, on_delete=models.CASCADE,)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE,)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE,)
     loan_date=models.DateTimeField()
     return_date=models.DateTimeField()
-    _id = models.AutoField(primary_key=True, editable=False)
 
 
 

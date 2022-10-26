@@ -1,15 +1,18 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
+
+from books.models import Book
  
 def books(request):
+   book_list = Book.objects.all()
    context = {
-       'book_list': ['Harry Potter','Lord of the Rings','Hobbit'],
+       'book_list': book_list,
    }
    return render(request, 'books.html', context)
 
 def add_book(request):
-    return HttpResponse("BOOK ADDED")
+   return render(request, 'addbook.html')
 
 def find_book(request):
     return HttpResponse("BOOK FOUND")
