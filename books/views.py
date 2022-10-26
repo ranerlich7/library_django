@@ -14,6 +14,10 @@ def books(request):
 def add_book(request):
    return render(request, 'addbook.html')
 
+def add_book_action(request):
+   
+   return HttpResponse("BOOK ADDED")
+
 def find_book(request):
     return HttpResponse("BOOK FOUND")
 

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <form action="{% url 'books:add_book_action' %}" method="POST" enctype=multipart/form-data>
+    {% csrf_token %}
     Title <input type="text" name="title">
     Author <input type="text" name="author">
     Genre <input type="text" name="genre">
