@@ -1,25 +1,40 @@
 from django.http import HttpResponse
 from django.template import loader
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from books.forms import BookForm
 
 from books.models import Book
- 
+
+
 def books(request):
-   book_list = Book.objects.all()
-   context = {
-       'book_list': book_list,
-   }
-   return render(request, 'books.html', context)
+    book_list = Book.objects.all()
+    context = {
+        'book_list': book_list,
+    }
+    return render(request, 'books.html', context)
+
 
 def add_book(request):
-   return render(request, 'addbook.html')
+    context = {
+        'bookform': BookForm(),
+    }
+    return render(request, 'addbook.html', context)
+
 
 def add_book_action(request):
-   
-   return HttpResponse("BOOK ADDED")
+    bookform = BookForm(request.POST)
+    if bookform.is_valid():
+        bookform.save()
+        return redirect('books')
+    else:
+        context = {
+            'bookform': bookform,
+        }
+        return render(request, 'addbook.html', context)
 
 def find_book(request):
     return HttpResponse("BOOK FOUND")
+
 
 def delete_book(request):
     return HttpResponse("BOOK DELETED")
