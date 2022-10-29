@@ -22,10 +22,10 @@ def add_book(request):
 
 
 def add_book_action(request):
-    bookform = BookForm(request.POST)
+    bookform = BookForm(request.POST, request.FILES)
     if bookform.is_valid():
         bookform.save()
-        return redirect('books')
+        return redirect('books:books')
     else:
         context = {
             'bookform': bookform,
