@@ -128,3 +128,7 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = BASE_DIR +'/static/images'
 STATIC_ROOT = BASE_DIR +'/staticfiles'
+
+LOGIN_REDIRECT_URL = "/"
+
+LOGOUT_REDIRECT_URL = "login"
