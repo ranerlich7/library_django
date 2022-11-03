@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 from django.conf.urls.static import static
 from . import settings
 from books.views import books
@@ -26,7 +27,7 @@ urlpatterns = [
     url(r'^books/', include('books.urls')),
     url(r'^accounts/', include("django.contrib.auth.urls")),  # new
     url(r'^register/', mylogin.register_request),
-    url(r'^', books)
+    url(r'^', login_required(books))
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
