@@ -13,7 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.conf.urls import include
+from django.urls import path
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
@@ -23,17 +24,17 @@ from books.views import books
 from books import mylogin, easy_login
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^books/', include('books.urls')),
+    path(r'admin/', admin.site.urls),
+    path(r'books/', include('books.urls')),
     
     # django contrib login - commented for now in favor of easy login.
-    # url(r'^accounts/', include("django.contrib.auth.urls")),  # new
-    # url(r'^register/', mylogin.register_request),
+    # path(r'accounts/', include("django.contrib.auth.urls")),  # new
+    # path(r'register/', mylogin.register_request),
 
     # easy login implementation
-    url(r'^elogin/', easy_login.elogin, name='elogin'),
+    path(r'elogin/', easy_login.elogin, name='elogin'),
 
-    url(r'^', login_required(books, login_url='elogin')),
+    path(r'', login_required(books, login_url='elogin')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
