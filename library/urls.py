@@ -20,14 +20,20 @@ from django.contrib.auth.decorators import login_required
 from django.conf.urls.static import static
 from . import settings
 from books.views import books
-from books import mylogin
+from books import mylogin, easy_login
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^books/', include('books.urls')),
-    url(r'^accounts/', include("django.contrib.auth.urls")),  # new
-    url(r'^register/', mylogin.register_request),
-    url(r'^', login_required(books))
+    
+    # django contrib login - commented for now in favor of easy login.
+    # url(r'^accounts/', include("django.contrib.auth.urls")),  # new
+    # url(r'^register/', mylogin.register_request),
+
+    # easy login implementation
+    url(r'^elogin/', easy_login.elogin, name='elogin'),
+
+    url(r'^', login_required(books, login_url='elogin')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

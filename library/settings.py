@@ -129,6 +129,7 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = BASE_DIR +'/static/images'
 STATIC_ROOT = BASE_DIR +'/staticfiles'
 
-LOGIN_REDIRECT_URL = "/"
+# LOGIN_REDIRECT_URL = "accounts/login/"
+LOGIN_REDIRECT_URL = "elogin"
 
-LOGOUT_REDIRECT_URL = "login"
+LOGOUT_REDIRECT_URL = "elogin"
