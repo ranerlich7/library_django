@@ -23,8 +23,8 @@
                 <li><span>Hello {{ user.username }}! &nbsp;</span>
                 <li><a href="{% url 'logout' %}">Log Out</a>
               {% else %}
-                <li><a href="{% url 'login' %}">Register</a>&nbsp;
-                <li><a href="{% url 'login' %}">Log In</a>
+                <li><a href="{% url 'elogin' %}">Register</a>&nbsp;
+                <li><a href="{% url 'elogin' %}">Log In</a>
               {% endif %}
             </ul>
             <!-- end login register-->
