@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
+
 
 def elogin(request):
     if request.POST:
@@ -29,4 +31,7 @@ def mylogout(request):
     logout(request)
     context = {}
     return redirect('books:books')
-    
+
+def eregister(request):
+    form = UserCreationForm()
+    return render(request, 'elogin.html',{'form':form, 'page':'register'})

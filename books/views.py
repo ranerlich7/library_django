@@ -5,7 +5,6 @@ from books.forms import BookForm
 
 from books.models import Book
 
-
 def books(request):
     book_list = Book.objects.all()
     context = {
