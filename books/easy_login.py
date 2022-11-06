@@ -33,5 +33,16 @@ def mylogout(request):
     return redirect('books:books')
 
 def eregister(request):
-    form = UserCreationForm()
+    if request.GET:
+        form = UserCreationForm()
+    else:
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('books:books')
+        else:
+            messages.error(request, 'Error registration failed')
+
     return render(request, 'elogin.html',{'form':form, 'page':'register'})
+
