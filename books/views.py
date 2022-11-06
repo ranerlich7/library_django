@@ -37,3 +37,8 @@ def find_book(request):
 
 def delete_book(request):
     return HttpResponse("BOOK DELETED")
+
+
+def book_detail(request, pk):
+    book = Book.objects.get(id=pk)
+    return render(request, 'book_detail.html', {'book':book})
