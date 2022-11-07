@@ -5,19 +5,21 @@
 {% if edit_book %}
 <img style="width:150px;height:150px" src="{% static 'images/' %}{{ book.image }}" class="card-img-top" alt="...">
 <br><hr>
-<form action="{% url 'books:edit' book.id %}">
+<form action="{% url 'books:edit' book.id %}" method="POST">
     {% csrf_token %}
     
-    Title<input type="text" name="title" value="{{ book.name }}"/>
+    Title<input type="text" name="name" value="{{ book.name }}"/>
     <br><br>
     Author<input type="text" name="author" value="{{ book.author }}"/>
     <br><br>
     Year Published<input type="date" name="year_published" value="{{ book.year_published|date:'Y-d-m' }}"/>
     <br><br>
-    Book type<input type="text" name="type" value="{{ book.get_type }}" enabled="false" readonly="true"/>
+    Book type<input type="text" name="typestub" value="{{ book.get_type }}" enabled="false" readonly="true"/>
     <br><br>
     <input type="submit" value="Save">
 </form>
+<br><br>
+<a href="{{ request.META.HTTP_REFERER }} ">Back</a>
 
 {% else %}
  

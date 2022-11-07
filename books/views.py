@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render, redirect
 from books.forms import BookForm
+from django.contrib import messages
 
 from books.models import Book
 
@@ -45,4 +46,18 @@ def book_detail(request, pk):
 
 def edit(request,pk):
     book = Book.objects.get(id=pk)
+    if request.POST:
+        book.author = request.POST.get('author')
+        book.name = request.POST.get('name')
+        book.year_published = request.POST.get('year_published')
+        try:
+            book.save()
+            messages.info(request, 'Saved successfuly!')
+            return redirect('books:book_detail', book.id)
+        except Exception as ex:
+            messages.error(request, 'ERROR saving book!'+ str(ex))
+            book = Book.objects.get(id=pk)
+
+        
     return render(request, 'book_detail.html', {'book':book, 'edit_book': True})
+    
