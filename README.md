@@ -1,3 +1,11 @@
+# to start working on this branch
+1. git clone
+2. git checkout base_before_login
+3. python -m venv venv
+4. ./venv/Scripts/Activate
+5. pip install -r requirements.txt
+
+
 # book model
 Id (PK)  
 Name  
