@@ -19,7 +19,7 @@
     <input type="submit" value="Save">
 </form>
 <br><br>
-<a href="{{ request.META.HTTP_REFERER }} ">Back</a>
+<a class="btn btn-info" href="{{ request.META.HTTP_REFERER }} ">Back</a>
 
 {% else %}
  
@@ -35,7 +35,8 @@
 <hr>
 Book can be loaned for: {{ book.get_status }}
 <br><br>
-<a href="{% url 'books:edit' book.id %}">Edit Book</a>
+<a class="btn btn-info" href="{% url 'books:edit' book.id %}">Edit Book</a>
+<a class="btn btn-danger" onclick="return confirm('are you sure?');"  href="{% url 'books:delete' book.id %}">Delete book</a>
 {% endif %}
 
 {% endblock %}

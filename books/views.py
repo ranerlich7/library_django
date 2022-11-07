@@ -36,8 +36,6 @@ def find_book(request):
     return HttpResponse("BOOK FOUND")
 
 
-def delete_book(request):
-    return HttpResponse("BOOK DELETED")
 
 
 def book_detail(request, pk):
@@ -61,3 +59,8 @@ def edit(request,pk):
         
     return render(request, 'book_detail.html', {'book':book, 'edit_book': True})
     
+def delete_book(request, pk):
+    book = Book.objects.get(id=pk)
+    book.delete()
+    return redirect('books:books')
+
