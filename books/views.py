@@ -3,6 +3,7 @@ from django.template import loader
 from django.shortcuts import render, redirect
 from books.forms import BookForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from books.models import Book
 
@@ -59,7 +60,11 @@ def edit(request,pk):
         
     return render(request, 'book_detail.html', {'book':book, 'edit_book': True})
     
+@login_required
 def delete_book(request, pk):
+    if not request.user.is_staff:
+        return HttpResponse('YOU ARE Not allowed to delete books')
+
     book = Book.objects.get(id=pk)
     book.delete()
     return redirect('books:books')
