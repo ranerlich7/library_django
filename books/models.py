@@ -24,11 +24,11 @@ class Book(models.Model):
     def __str__(self):
         return self.name
     
-    def get_status(self):
-        for choice in Book.BookType2:
+    def get_type(self):
+        for choice in self.BookType2:
             if self.type == choice.value:
                 return choice.label
-        return 'NO STATUS'
+        return 'NO TYPE'
 
 class Loan(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE,)

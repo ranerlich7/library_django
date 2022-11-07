@@ -42,3 +42,7 @@ def delete_book(request):
 def book_detail(request, pk):
     book = Book.objects.get(id=pk)
     return render(request, 'book_detail.html', {'book':book})
+
+def edit(request,pk):
+    book = Book.objects.get(id=pk)
+    return render(request, 'book_detail.html', {'book':book, 'edit_book': True})
