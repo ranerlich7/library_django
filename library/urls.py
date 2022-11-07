@@ -5,15 +5,16 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 Examples:
 Function views
     1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
+    2. Add a URL to urlpatterns:  path(r'^$', views.home, name='home')
 Class-based views
     1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+    2. Add a URL to urlpatterns:  path(r'^$', Home.as_view(), name='home')
 Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+    2. Add a URL to urlpatterns:  path(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.conf.urls import include
+from django.urls import path
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
@@ -23,11 +24,11 @@ from books.views import books
 from books import mylogin
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^books/', include('books.urls')),
-    url(r'^accounts/', include("django.contrib.auth.urls")),  # new
-    url(r'^register/', mylogin.register_request),
-    url(r'^', login_required(books))
+    path('admin/', admin.site.urls),
+    path('books/', include('books.urls')),
+    path('accounts/', include("django.contrib.auth.urls")),  # new
+    path('register/', mylogin.register_request),
+    path('', login_required(books))
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
