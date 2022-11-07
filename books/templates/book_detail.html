@@ -1,0 +1,43 @@
+{% extends 'base.html' %}  
+{% load static %}
+{% block content %} 
+
+{% if edit_book %}
+<img style="width:150px;height:150px" src="{% static 'images/' %}{{ book.image }}" class="card-img-top" alt="...">
+
+<form action="{% url 'books:edit' book.id %}">
+    {% csrf_token %}
+    
+    Title<input type="text" name="title" value="{{ book.name }}"/>
+    <br>
+    Author<input type="text" name="author" value="{{ book.author }}"/>
+    <br>
+    Year Published<input type="date" name="year_published" value="{{ book.year_published|date:'Y' }}"/>
+    <br>
+    Book type<input type="text" name="type" value="{{ book.get_type }}" enabled="false" readonly="true"/>
+    <br>
+    <input type="submit" value="Save">
+</form>
+
+{% else %}
+ 
+<img style="width:150px;height:150px" src="{% static 'images/' %}{{ book.image }}" class="card-img-top" alt="...">
+<br>
+<h1>{{ book.name }} by {{ book.author }}</h1>
+<i><h4>Published in {{ book.year_published|date:"Y" }} </h4></i>
+<!-- # more tags (example): 
+# |truncatechars:3
+|timesince
+|floatformat:2
+-->
+<hr>
+Book can be loaned for: {{ book.get_status }}
+<br><br>
+<a href="{% url 'books:edit' book.id %}">Edit Book</a>
+{% endif %}
+
+{% endblock %}
+
+
+
+
