@@ -25,7 +25,13 @@
 1. add edit form to book_detail.url
 2. add urls and functions for edit
 
+# 6th phase: edit book implementation
+1. implement edit book using form, save .
+2. throw an error if you got one to messages.error
 
+# 7th phase: delete implemented
+1. implement delete book functionality
+2. limit delete and edit to is_staff users only
 
 
 
