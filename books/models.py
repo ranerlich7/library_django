@@ -23,6 +23,12 @@ class Book(models.Model):
     image = models.ImageField(null=True, blank=True, default='/placeholder.png')
     def __str__(self):
         return self.name
+    
+    def get_status(self):
+        for choice in Book.BookType2:
+            if self.type == choice.value:
+                return choice.label
+        return 'NO STATUS'
 
 class Loan(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE,)
