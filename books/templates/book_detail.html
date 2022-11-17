@@ -37,7 +37,7 @@ Book can be loaned for: {{ book.get_status }}
 <br><br>
 {% if user.is_staff %}
 <a class="btn btn-info" href="{% url 'books:edit' book.id %}">Edit Book</a>
-<a class="btn btn-danger" onclick="return confirm('are you sure?');"  href="{% url 'books:delete' book.id %}">Delete book</a>
+<a class="btn btn-danger" onclick="confirm('are you sure?');"  href="{% url 'books:delete' book.id %}">Delete book</a>
 {% endif %}
 
 {% endif %}

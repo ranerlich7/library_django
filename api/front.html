@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>My Library</h1>
+    <div id="books-container" ></div>
+</body>
+        <script>
+            let booksContainer = document.getElementById('books-container')
+
+            fetch('http://127.0.0.1:8000/api/books')
+                .then(res => res.json())
+                .then(
+                    res2 => {
+                        console.log(res2)
+                        books=res2;
+                        for (let i =0; books.length > i; i++) {
+                            let book = books[i]
+                            let row = `<div>
+                                <h3>${book.name}</h3>
+                                </div>`
+                            booksContainer.innerHTML += row
+                        }
+                    }
+                )
+
+        </script>
+
+</html>
