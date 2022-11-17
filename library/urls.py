@@ -35,6 +35,7 @@ urlpatterns = [
     path(r'elogin/', easy_login.elogin, name='elogin'),
     path(r'eregister/', easy_login.eregister, name='eregister'),
     path(r'logout/', easy_login.mylogout, name='logout'),
+    path(r'api/', include('api.urls')),
 
     path(r'', login_required(books, login_url='elogin')),
 ]
